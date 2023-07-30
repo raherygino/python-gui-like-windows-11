@@ -9,7 +9,7 @@ from qfluentwidgets import (NavigationItemPosition, MessageBox, setTheme, Theme,
                             InfoBadgePosition)
 from qfluentwidgets import FluentIcon as FIF
 
-from .home_interface import HomeFrame
+from .interfaces import *
 
 
 class MainWidget(QFrame):
@@ -32,30 +32,20 @@ class MainWindow(FluentWindow):
 
         # create sub interface
         self.homeInterface = HomeFrame()
-        self.musicInterface = MainWidget('Music Interface', self)
-        self.videoInterface = MainWidget('Video Interface', self)
-        self.folderInterface = MainWidget('Folder Interface', self)
-        self.settingInterface = MainWidget('Setting Interface', self)
-        self.albumInterface = MainWidget('Album Interface', self)
-        self.albumInterface1 = MainWidget('Album Interface 1', self)
-        self.albumInterface2 = MainWidget('Album Interface 2', self)
-        self.albumInterface1_1 = MainWidget('Album Interface 1-1', self)
+        self.settingInterface = SettingsFrame()
+        self.listProductsInterface = ListProductsFrame("list_1")
+        self.listProductsInterface2 = ListProductsFrame("list_2")
+        self.addProductInterface = AddProductFrame()
 
         self.initNavigation()
         self.initWindow()
 
     def initNavigation(self):
         self.addSubInterface(self.homeInterface, FIF.HOME, 'Home')
-        self.addSubInterface(self.musicInterface, FIF.MUSIC, 'Music library')
-        self.addSubInterface(self.videoInterface, FIF.VIDEO, 'Video library')
-
         self.navigationInterface.addSeparator()
-
-        self.addSubInterface(self.albumInterface, FIF.ALBUM, 'Albums', NavigationItemPosition.SCROLL)
-        self.addSubInterface(self.albumInterface1, FIF.ALBUM, 'Album 1', parent=self.albumInterface)
-        self.addSubInterface(self.albumInterface1_1, FIF.ALBUM, 'Album 1.1', parent=self.albumInterface1)
-        self.addSubInterface(self.albumInterface2, FIF.ALBUM, 'Album 2', parent=self.albumInterface)
-        self.addSubInterface(self.folderInterface, FIF.FOLDER, 'Folder library', NavigationItemPosition.SCROLL)
+        self.addSubInterface(self.listProductsInterface, FIF.APPLICATION, 'Products', NavigationItemPosition.SCROLL)
+        self.addSubInterface(self.addProductInterface, FIF.FOLDER_ADD, 'New product', parent=self.listProductsInterface)
+        self.addSubInterface(self.listProductsInterface2, FIF.FOLDER, 'List products', parent=self.listProductsInterface)
 
         # add custom widget to bottom
         
@@ -68,19 +58,19 @@ class MainWindow(FluentWindow):
 
         self.addSubInterface(self.settingInterface, FIF.SETTING, 'Settings', NavigationItemPosition.BOTTOM)
 
-        # add badge to navigation item
+        ''' add badge to navigation item
         item = self.navigationInterface.widget(self.videoInterface.objectName())
         InfoBadge.attension(
             text=9,
             parent=item.parent(),
             target=item,
             position=InfoBadgePosition.NAVIGATION_ITEM
-        )
+        ) '''
 
     def initWindow(self):
         self.resize(900, 700)
         self.setWindowIcon(QIcon(':/qfluentwidgets/images/logo.png'))
-        self.setWindowTitle('PyQt-Fluent-Widgets')
+        self.setWindowTitle('Invoice App')
 
         desktop = QApplication.desktop().availableGeometry()
         w, h = desktop.width(), desktop.height()
