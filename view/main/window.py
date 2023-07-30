@@ -32,11 +32,16 @@ class MainWindow(FluentWindow):
 
         # create sub interface
         self.homeInterface = HomeFrame()
-        self.settingInterface = SettingsFrame()
-        self.listProductsInterface = ListProductsFrame("list_1")
-        self.listProductsInterface2 = ListProductsFrame("list_2")
+
+        self.listProductsInterface = ListProductsFrame("list_prod_1")
+        self.listProductsInterface2 = ListProductsFrame("list_prod_2")
         self.addProductInterface = AddProductFrame()
 
+        self.listInvoicesInterface = ListInvoicesFrame("list_inv_1")
+        self.listInvoicesInterface2 = ListInvoicesFrame("list_inv_2")
+        self.addInvoiceInterface = AddInvoiceFrame()
+
+        self.settingInterface = SettingsFrame()
         self.initNavigation()
         self.initWindow()
 
@@ -46,6 +51,9 @@ class MainWindow(FluentWindow):
         self.addSubInterface(self.listProductsInterface, FIF.APPLICATION, 'Products', NavigationItemPosition.SCROLL)
         self.addSubInterface(self.addProductInterface, FIF.FOLDER_ADD, 'New product', parent=self.listProductsInterface)
         self.addSubInterface(self.listProductsInterface2, FIF.FOLDER, 'List products', parent=self.listProductsInterface)
+        self.addSubInterface(self.listInvoicesInterface, FIF.DOCUMENT, 'Invoices', NavigationItemPosition.SCROLL)
+        self.addSubInterface(self.addInvoiceInterface, FIF.FOLDER_ADD, 'New Invoices', parent=self.listInvoicesInterface)
+        self.addSubInterface(self.listInvoicesInterface2, FIF.FOLDER, 'List Invoices', parent=self.listInvoicesInterface)
 
         # add custom widget to bottom
         
