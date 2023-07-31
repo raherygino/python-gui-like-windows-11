@@ -9,7 +9,7 @@ def setApplication() -> QApplication:
 
 if __name__ == '__main__':
     app = setApplication()
-    #setTheme(Theme.DARK)
+    setTheme(Theme.DARK)
     w = MainWindow()
     w.show()
     app.exec_()

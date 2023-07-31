@@ -26,10 +26,6 @@ class MainWidget(QFrame):
 
 class MainWindow(FluentWindow):
 
-    def _onCurrentInterfaceChanged(self, index: int):
-        print(index)
-        return super()._onCurrentInterfaceChanged(index)
-
     def __init__(self):
         super().__init__()
 
