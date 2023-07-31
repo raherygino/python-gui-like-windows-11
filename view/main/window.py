@@ -26,6 +26,10 @@ class MainWidget(QFrame):
 
 class MainWindow(FluentWindow):
 
+    def _onCurrentInterfaceChanged(self, index: int):
+        print(index)
+        return super()._onCurrentInterfaceChanged(index)
+
     def __init__(self):
         super().__init__()
 
@@ -40,10 +44,11 @@ class MainWindow(FluentWindow):
         self.listInvoicesInterface = ListInvoicesFrame("list_inv_1")
         self.listInvoicesInterface2 = ListInvoicesFrame("list_inv_2")
         self.addInvoiceInterface = AddInvoiceFrame()
-
         self.settingInterface = SettingsFrame()
         self.initNavigation()
         self.initWindow()
+
+
 
     def initNavigation(self):
         self.addSubInterface(self.homeInterface, FIF.HOME, 'Home')
