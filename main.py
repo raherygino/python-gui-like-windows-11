@@ -10,6 +10,7 @@ def setApplication() -> QApplication:
 if __name__ == '__main__':
     app = setApplication()
     setTheme(Theme.DARK)
+    setThemeColor("#142170", False)
     w = MainWindow()
     w.show()
     app.exec_()

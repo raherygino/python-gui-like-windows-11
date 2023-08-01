@@ -3,14 +3,67 @@ import sys
 from PyQt5 import QtGui
 from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtGui import QIcon, QDesktopServices
-from PyQt5.QtWidgets import QApplication, QFrame, QHBoxLayout
+from PyQt5.QtWidgets import QLabel, QApplication, QFrame, QHBoxLayout, QVBoxLayout
 from qfluentwidgets import (NavigationItemPosition, MessageBox, setTheme, Theme, FluentWindow,
                             NavigationAvatarWidget, qrouter, SubtitleLabel, setFont, InfoBadge,
-                            InfoBadgePosition)
+                            InfoBadgePosition, SearchLineEdit, setThemeColor)
 from qfluentwidgets import FluentIcon as FIF
+from qframelesswindow import FramelessWindow, TitleBar
 
 from .interfaces import *
 
+class CustomTitleBar(TitleBar):
+    """ Title bar with icon and title """
+
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.setFixedHeight(48)
+        self.hBoxLayout.removeWidget(self.minBtn)
+        self.hBoxLayout.removeWidget(self.maxBtn)
+        self.hBoxLayout.removeWidget(self.closeBtn)
+
+        # add window icon
+        self.iconLabel = QLabel(self)
+        self.iconLabel.setFixedSize(18, 18)
+        self.hBoxLayout.insertSpacing(0, 20)
+        self.hBoxLayout.insertWidget(
+            1, self.iconLabel, 0, Qt.AlignLeft | Qt.AlignVCenter)
+        self.window().windowIconChanged.connect(self.setIcon)
+
+        # add title label
+        self.titleLabel = QLabel(self)
+        self.hBoxLayout.insertWidget(
+            2, self.titleLabel, 0, Qt.AlignLeft | Qt.AlignVCenter)
+        self.titleLabel.setObjectName('titleLabel')
+        self.window().windowTitleChanged.connect(self.setTitle)
+
+        # add search line edit
+        self.searchLineEdit = SearchLineEdit(self)
+        self.searchLineEdit.setPlaceholderText('搜索应用、游戏、电影、设备等')
+        self.searchLineEdit.setFixedWidth(400)
+        self.searchLineEdit.setClearButtonEnabled(True)
+
+        self.vBoxLayout = QVBoxLayout()
+        self.buttonLayout = QHBoxLayout()
+        self.buttonLayout.setSpacing(0)
+        self.buttonLayout.setContentsMargins(0, 0, 0, 0)
+        self.buttonLayout.setAlignment(Qt.AlignTop)
+        self.buttonLayout.addWidget(self.minBtn)
+        self.buttonLayout.addWidget(self.maxBtn)
+        self.buttonLayout.addWidget(self.closeBtn)
+        self.vBoxLayout.addLayout(self.buttonLayout)
+        self.vBoxLayout.addStretch(1)
+        self.hBoxLayout.addLayout(self.vBoxLayout, 0)
+
+    def setTitle(self, title):
+        self.titleLabel.setText(title)
+        self.titleLabel.adjustSize()
+
+    def setIcon(self, icon):
+        self.iconLabel.setPixmap(QIcon(icon).pixmap(18, 18))
+
+    def resizeEvent(self, e):
+        self.searchLineEdit.move((self.width() - self.searchLineEdit.width()) //2, 8)
 
 class MainWidget(QFrame):
 
@@ -28,7 +81,7 @@ class MainWindow(FluentWindow):
 
     def __init__(self):
         super().__init__()
-
+    
 
         # create sub interface
         self.homeInterface = HomeFrame()
@@ -78,8 +131,8 @@ class MainWindow(FluentWindow):
 
     def initWindow(self):
         self.resize(900, 700)
-        self.setWindowIcon(QIcon(':/qfluentwidgets/images/logo.png'))
-        self.setWindowTitle('Invoice App')
+        # self.setWindowIcon(QIcon(':/qfluentwidgets/images/logo.png'))
+        # self.setWindowTitle('Invoice App')
 
         desktop = QApplication.desktop().availableGeometry()
         w, h = desktop.width(), desktop.height()
