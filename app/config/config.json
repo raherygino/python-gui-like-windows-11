@@ -1,0 +1,20 @@
+{
+    "Material": {
+        "AcrylicBlurRadius": 10
+    },
+    "Update": {
+        "CheckUpdateAtStartUp": false
+    },
+    "Folders": {
+        "Download": "C:/Users/Ginot/Downloads",
+        "LocalMusic": []
+    },
+    "MainWindow": {
+        "DpiScale": 1,
+        "Language": "en_US"
+    },
+    "QFluentWidgets": {
+        "ThemeColor": "#ffe73a3a",
+        "ThemeMode": "Dark"
+    }
+}
