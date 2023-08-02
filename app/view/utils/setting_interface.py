@@ -65,15 +65,6 @@ class SettingInterface(ScrollArea):
             ],
             parent=self.personalGroup
         )
-        self.comboBox = ComboBox(self)
-
-        items = ['English', 'French']
-        self.comboBox.addItems(items)
-        self.comboBox.setCurrentIndex(0)
-        #self.comboBox.currentTextChanged.connect(print)
-        self.comboBox.move(200, 200)
-        #self.languageCard = AppCard(FIF.LANGUAGE, 'Language', 'Set your preferred language for UI', self.comboBox)
-
 
         self.languageCard = PrimaryPushSettingCard(
             None,
@@ -82,7 +73,12 @@ class SettingInterface(ScrollArea):
             'Set your preferred language for UI',
             self.personalGroup
         )
-
+        
+        self.comboBox = ComboBox(self)
+        self.comboBox.addItems(['Français', 'English'])
+        self.comboBox.setCurrentIndex(0)
+        self.comboBox.currentTextChanged.connect(self.onchange)
+        self.comboBox.move(200, 200)
 
         self.languageCard.hBoxLayout.removeWidget(self.languageCard.button)
         self.languageCard.button = None;
@@ -177,6 +173,17 @@ class SettingInterface(ScrollArea):
             duration=1500,
             parent=self
         )
+    def onchange(self, val):
+        self.comboBox.setCurrentIndex(0)
+        if (val == "English") :
+            InfoBar.info(
+                self.tr('Langue indisponible'),
+                '',
+                duration=2500,
+                parent=self
+            )
+            
+
 
     def __onDownloadFolderCardClicked(self):
         """ download folder card clicked slot """

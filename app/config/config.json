@@ -14,10 +14,10 @@
     },
     "MainWindow": {
         "DpiScale": 1,
-        "Language": "en_US"
+        "Language": "fr_FR"
     },
     "QFluentWidgets": {
-        "ThemeColor": "#ffe7b215",
+        "ThemeColor": "#ffaa1153",
         "ThemeMode": "Dark"
     }
 }
