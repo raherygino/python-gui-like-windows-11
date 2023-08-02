@@ -4,10 +4,10 @@ from PyQt5.QtGui import QPainter, QPen, QColor
 from PyQt5.QtWidgets import QWidget, QVBoxLayout
 from qfluentwidgets import (ScrollArea, isDarkTheme, Theme, TitleLabel, CaptionLabel)
 
-from ..common.config import cfg
-from ..common.style_sheet import StyleSheet
-from ..components.layout.ExampleCard import ExampleCard
-from ..components.layout.Card import Card
+from ...common.config import cfg
+from ...common.style_sheet import StyleSheet
+from ...components.layout.ExampleCard import ExampleCard
+from ...components.layout.Card import Card
 
 class SeparatorWidget(QWidget):
     """ Seperator widget """

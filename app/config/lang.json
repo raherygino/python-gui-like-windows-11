@@ -1,0 +1,12 @@
+{
+    "en_US": {
+      "hello": "Hello World!",
+      "translation": "Translation Example",
+      "language": "Language"
+    },
+    "fr_FR": {
+      "hello": "Bonjour le monde !",
+      "translation": "Exemple de traduction",
+      "language": "Langue"
+    }
+}

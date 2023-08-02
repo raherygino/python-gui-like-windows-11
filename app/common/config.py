@@ -1,5 +1,6 @@
 # coding:utf-8
 from enum import Enum
+import json
 
 from PyQt5.QtCore import QLocale
 from qfluentwidgets import (qconfig, QConfig, ConfigItem, OptionsConfigItem, BoolValidator,
@@ -15,6 +16,14 @@ class Language(Enum):
     ENGLISH = QLocale(QLocale.English)
     AUTO = QLocale()
 
+class Lang():
+    def __init__(self):
+        self.current = "fr_FR"
+        with open('app/config/config.json', 'r') as config:
+            self.current = json.load(config)['MainWindow']['Language']
+
+    def current(self) -> str:
+        return self.current    
 
 class LanguageSerializer(ConfigSerializer):
     """ Language serializer """

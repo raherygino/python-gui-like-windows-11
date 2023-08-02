@@ -1,13 +1,16 @@
 {
     "Material": {
-        "AcrylicBlurRadius": 11
+        "AcrylicBlurRadius": 14
     },
     "Update": {
         "CheckUpdateAtStartUp": false
     },
     "Folders": {
         "Download": "C:/Users/Ginot/Downloads",
-        "LocalMusic": []
+        "LocalMusic": [
+            "C:/Users/Ginot/Music",
+            "C:/Users/Ginot"
+        ]
     },
     "MainWindow": {
         "DpiScale": 1,

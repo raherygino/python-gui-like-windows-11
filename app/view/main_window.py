@@ -6,9 +6,10 @@ from PyQt5.QtWidgets import QApplication
 from qfluentwidgets import NavigationAvatarWidget, NavigationItemPosition, MessageBox, FluentWindow, SplashScreen
 from qfluentwidgets import FluentIcon as FIF
 
-from .gallery_interface import GalleryInterface
-from .setting_interface import SettingInterface
-from .blank_interface import BlankInterface
+from .utils.gallery_interface import GalleryInterface
+from .utils.setting_interface import SettingInterface
+from .utils.blank_interface import BlankInterface
+from .home.home_interface import HomeInterface
 
 from ..common.config import SUPPORT_URL
 from ..common.signal_bus import signalBus
@@ -22,6 +23,7 @@ class MainWindow(FluentWindow):
         self.initWindow()
 
         # create sub interface
+        self.homeInterface = HomeInterface(self)
         self.blankInterface = BlankInterface(self)
         self.settingInterface = SettingInterface(self)
         # initialize layout
@@ -38,6 +40,7 @@ class MainWindow(FluentWindow):
     def initNavigation(self):
         # add navigation items
         t = Translator()
+        self.addSubInterface(self.homeInterface, FIF.HOME, "Home")
         self.addSubInterface(self.blankInterface, FIF.DOCUMENT, t.blank)
         self.navigationInterface.addSeparator()
         pos = NavigationItemPosition.SCROLL
