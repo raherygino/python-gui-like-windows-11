@@ -58,6 +58,8 @@ FEEDBACK_URL = "https://github.com/zhiyiYo/PyQt-Fluent-Widgets/issues"
 RELEASE_URL = "https://github.com/zhiyiYo/PyQt-Fluent-Widgets/releases/latest"
 SUPPORT_URL = "https://afdian.net/a/zhiyiYo"
 
+V_BOX = "vertical"
+H_BOX = "horizontal"
 
 cfg = Config()
 qconfig.load('app/config/config.json', cfg)
