@@ -13,7 +13,7 @@ from .blank_interface import BlankInterface
 from ..common.config import SUPPORT_URL
 from ..common.signal_bus import signalBus
 from ..common.translator import Translator
-
+from ..common import resource
 
 class MainWindow(FluentWindow):
 
