@@ -12,19 +12,19 @@ class LinkCard(QFrame):
     def __init__(self, icon, title, content, url, parent=None):
         super().__init__(parent=parent)
         self.url = QUrl(url)
-        self.setFixedSize(198, 220)
+        self.setFixedSize(200, 220)
         self.iconWidget = IconWidget(icon, self)
         self.titleLabel = QLabel(title, self)
         self.contentLabel = QLabel(TextWrap.wrap(content, 28, False)[0], self)
-        self.urlWidget = IconWidget(FluentIcon.LINK, self)
+        # self.urlWidget = IconWidget(FluentIcon.LINK, self)
 
         self.__initWidget()
 
     def __initWidget(self):
-        self.setCursor(Qt.PointingHandCursor)
+        #self.setCursor(Qt.PointingHandCursor)
 
         self.iconWidget.setFixedSize(54, 54)
-        self.urlWidget.setFixedSize(16, 16)
+        # self.urlWidget.setFixedSize(16, 16)
 
         self.vBoxLayout = QVBoxLayout(self)
         self.vBoxLayout.setSpacing(0)
@@ -35,14 +35,14 @@ class LinkCard(QFrame):
         self.vBoxLayout.addSpacing(8)
         self.vBoxLayout.addWidget(self.contentLabel)
         self.vBoxLayout.setAlignment(Qt.AlignLeft | Qt.AlignTop)
-        self.urlWidget.move(170, 192)
+        # self.urlWidget.move(170, 192)
 
         self.titleLabel.setObjectName('titleLabel')
         self.contentLabel.setObjectName('contentLabel')
 
-    def mouseReleaseEvent(self, e):
+    ''' def mouseReleaseEvent(self, e):
         super().mouseReleaseEvent(e)
-        QDesktopServices.openUrl(self.url)
+        QDesktopServices.openUrl(self.url) '''
 
 
 class LinkCardView(SingleDirectionScrollArea):
