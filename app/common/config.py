@@ -29,10 +29,10 @@ class LanguageSerializer(ConfigSerializer):
     """ Language serializer """
 
     def serialize(self, language):
-        return language.value.name() if language != Language.AUTO else "Auto"
+        return language.value.name() if language != Language.AUTO else "fr_FR"
 
     def deserialize(self, value: str):
-        return Language(QLocale(value)) if value != "Auto" else Language.AUTO
+        return Language(QLocale(value)) if value != "fr_FR" else Language.AUTO
 
 
 class Config(QConfig):
