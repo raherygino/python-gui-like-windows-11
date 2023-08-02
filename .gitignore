@@ -24,6 +24,7 @@ share/python-wheels/
 _demo/
 _old/
 _examples/
+app/config/
 *.egg-info/
 .installed.cfg
 *.egg

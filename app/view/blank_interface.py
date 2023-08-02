@@ -1,7 +1,7 @@
 # coding:utf-8
-from qfluentwidgets import TitleLabel
 from .gallery_interface import GalleryInterface
 from ..common.translator import Translator
+from ..components import *
 
 class BlankInterface(GalleryInterface):
     """ Blank interface """
@@ -13,7 +13,13 @@ class BlankInterface(GalleryInterface):
             subtitle='Blank page',
             parent=parent
         )
+
+        self.row = Frame('horizontal', 'row_1', parent=parent)
+        self.inputFirstName = InputText("Firstname", self.row)
+        self.inputLastName = InputText("Lastname", self.row)
+        self.selectGenre = Select("Genre", ["Female", "Male"], self.row)
+        self.addCard('Blank card', self.row)
+
+        #self.card.setMargins(18,18,18,18)
+
         self.setObjectName('blankInterface')
-        self.title = TitleLabel('Hello world')
-        self.card = self.addCard('My first card',self.title)
-        self.card.setMargins(18,18,18,18)

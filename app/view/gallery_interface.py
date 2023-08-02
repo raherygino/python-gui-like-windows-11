@@ -6,8 +6,8 @@ from qfluentwidgets import (ScrollArea, isDarkTheme, Theme, TitleLabel, CaptionL
 
 from ..common.config import cfg
 from ..common.style_sheet import StyleSheet
-from ..components.ExampleCard import ExampleCard
-from ..components.Card import Card
+from ..components.layout.ExampleCard import ExampleCard
+from ..components.layout.Card import Card
 
 class SeparatorWidget(QWidget):
     """ Seperator widget """
