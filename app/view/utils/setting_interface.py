@@ -11,10 +11,10 @@ from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtWidgets import QWidget, QLabel, QFileDialog
 
 from ...common.icon import Icon
-from ...common.config import cfg, HELP_URL, FEEDBACK_URL, AUTHOR, VERSION, YEAR
+from ...common.config import cfg, HELP_URL, FEEDBACK_URL, AUTHOR, VERSION, YEAR, Lang
 from ...common.style_sheet import StyleSheet
 from ...components.layout.AppCard import AppCard
-
+from ...common.Translate import Translate
 
 class SettingInterface(ScrollArea):
     """ Setting interface """
@@ -29,39 +29,42 @@ class SettingInterface(ScrollArea):
         super().__init__(parent=parent)
         self.scrollWidget = QWidget()
         self.expandLayout = ExpandLayout(self.scrollWidget)
+        self.currentLang = Lang().current
+        self.trans = Translate(self.currentLang).text
 
         # setting label
-        self.settingLabel = QLabel(self.tr("Settings"), self)
+        self.settingLabel = QLabel(self.trans['settings'], self)
 
         # personalization
         self.personalGroup = SettingCardGroup(
-            self.tr('Personalization'), self.scrollWidget)
+            self.trans['personalization'], self.scrollWidget)
         self.themeCard = OptionsSettingCard(
             cfg.themeMode,
             FIF.BRUSH,
-            self.tr('Application theme'),
-            self.tr("Change the appearance of your application"),
+            self.trans['app_theme_title'],
+            self.trans['app_theme_details'],
             texts=[
-                self.tr('Light'), self.tr('Dark'),
-                self.tr('Use system setting')
+                self.trans['light'], self.trans['dark'],
+                self.trans['system_setting']
             ],
             parent=self.personalGroup
         )
         self.themeColorCard = CustomColorSettingCard(
             cfg.themeColor,
             FIF.PALETTE,
-            self.tr('Theme color'),
-            self.tr('Change the theme color of you application'),
+            self.trans['color_theme_title'],
+            self.trans['color_theme_details'],
             self.personalGroup
         )
+        self.themeColorCard.choiceLabel.setText(self.trans['color_default'])
         self.zoomCard = OptionsSettingCard(
             cfg.dpiScale,
             FIF.ZOOM,
-            self.tr("Interface zoom"),
-            self.tr("Change the size of widgets and fonts"),
+            self.trans['interface_zoom_title'],
+            self.trans['interface_zoom_details'],
             texts=[
                 "100%", "125%", "150%",
-                self.tr("Use system setting")
+                self.trans['system_setting']
             ],
             parent=self.personalGroup
         )
@@ -87,40 +90,43 @@ class SettingInterface(ScrollArea):
         self.languageCard.hBoxLayout.addWidget(self.comboBox)
         self.languageCard.hBoxLayout.setContentsMargins(14,0,14,0) '''
         # update software
+        '''
         self.updateSoftwareGroup = SettingCardGroup(
-            self.tr("Software update"), self.scrollWidget)
+            self.trans['software_update'], self.scrollWidget)
+        
         self.updateOnStartUpCard = SwitchSettingCard(
             FIF.UPDATE,
-            self.tr('Check for updates when the application starts'),
-            self.tr('The new version will be more stable and have more features'),
+            self.trans['check_for_update_title'],
+            self.trans['check_for_update_details'],
             configItem=cfg.checkUpdateAtStartUp,
             parent=self.updateSoftwareGroup
         )
-
+        self.updateOnStartUpCard.switchButton.setOnText("Activé")
+        self.updateOnStartUpCard.switchButton.setOffText("Désactivé")
+        '''
         # application
-        self.aboutGroup = SettingCardGroup(self.tr('About'), self.scrollWidget)
+        self.aboutGroup = SettingCardGroup(self.trans['about'], self.scrollWidget)
         self.helpCard = HyperlinkCard(
             HELP_URL,
-            self.tr('Open help page'),
+            self.trans['help_button'],
             FIF.HELP,
-            self.tr('Help'),
-            self.tr(
-                'Discover new features and learn useful tips about PyQt-Fluent-Widgets'),
+            self.trans['help_title'],
+            self.trans['help_details'],
             self.aboutGroup
         )
         self.feedbackCard = PrimaryPushSettingCard(
-            self.tr('Provide feedback'),
+            self.trans['feedback_title'],
             FIF.FEEDBACK,
-            self.tr('Provide feedback'),
-            self.tr('Help us improve PyQt-Fluent-Widgets by providing feedback'),
+            self.trans['feedback_title'],
+            self.trans['feedback_details'],
             self.aboutGroup
         )
         
        # print()
         self.aboutCard = PrimaryPushSettingCard(
-            self.tr('Check update'),
+            self.trans['software_update'],
             FIF.INFO,
-            self.tr('About'),
+            self.trans['about'],
             '© ' + self.tr('Copyright') + f" {YEAR}, {AUTHOR}. " +
             self.tr('Version') + " " + VERSION,
             self.aboutGroup
@@ -152,9 +158,7 @@ class SettingInterface(ScrollArea):
         self.personalGroup.addSettingCard(self.themeColorCard)
         self.personalGroup.addSettingCard(self.zoomCard)
         # self.personalGroup.addSettingCard(self.languageCard)
-
-
-        self.updateSoftwareGroup.addSettingCard(self.updateOnStartUpCard)
+        #self.updateSoftwareGroup.addSettingCard(self.updateOnStartUpCard)
 
         self.aboutGroup.addSettingCard(self.helpCard)
         self.aboutGroup.addSettingCard(self.feedbackCard)
@@ -164,7 +168,7 @@ class SettingInterface(ScrollArea):
         self.expandLayout.setSpacing(28)
         self.expandLayout.setContentsMargins(36, 10, 36, 0)
         self.expandLayout.addWidget(self.personalGroup)
-        self.expandLayout.addWidget(self.updateSoftwareGroup)
+        #self.expandLayout.addWidget(self.updateSoftwareGroup)
         self.expandLayout.addWidget(self.aboutGroup)
 
     def __showRestartTooltip(self):

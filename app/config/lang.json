@@ -9,7 +9,7 @@
       "translation": "Exemple de traduction",
       "language": "Langue",
       "settings": "Paramètres",
-      "personalization": "Préferences",
+      "personalization": "Préférences",
       "app_theme_title": "Thème de l'application",
       "app_theme_details": "Changer l'apparence de votre application",
       "light": "Lumière",
@@ -31,7 +31,6 @@
       "help_details": "Découvrez de nouvelles fonctionnalités et apprenez des conseils utiles sur PyQT-Fluents-Widgets",
       "help_button": "Voir la page d'aide",
       "feedback_title": "Envoyer un feedback",
-      "feedback_details": "Aidez nous pour améliorer PyQt-Fluents par votre feedback",
-      "version": "Copyright 2023, zhiyiYo, Version 1.0.2"
+      "feedback_details": "Aidez nous pour améliorer PyQt-Fluents par votre feedback"
     }
 }
