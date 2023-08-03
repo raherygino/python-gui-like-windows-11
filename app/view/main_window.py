@@ -57,7 +57,7 @@ class MainWindow(FluentWindow):
         # add custom widget to bottom
         self.navigationInterface.addWidget(
             routeKey='avatar',
-            widget=NavigationAvatarWidget('zhiyiYo', ':/gallery/images/shoko.png'),
+            widget=NavigationAvatarWidget('Georginot', 'app/resource/images/user.png'),
             onClick=self.onSupport,
             position=NavigationItemPosition.BOTTOM
         )
@@ -69,7 +69,7 @@ class MainWindow(FluentWindow):
     def initWindow(self):
         self.resize(960, 670)
         self.setMinimumWidth(760)
-        self.setWindowIcon(QIcon(':/gallery/images/logo.png'))
+        self.setWindowIcon(QIcon('app/resource/images/logo.png'))
         self.setWindowTitle('PyQt-Fluent-Widgets')
         
         # create splash screen

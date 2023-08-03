@@ -4,12 +4,12 @@ from PyQt5.QtGui import QPixmap, QPainter, QColor, QBrush, QPainterPath
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel
 
 from qfluentwidgets import ScrollArea, isDarkTheme, FluentIcon
-from ...common.config import cfg, HELP_URL, REPO_URL, EXAMPLE_URL, FEEDBACK_URL
+from ...common.config import cfg, HELP_URL, REPO_URL, EXAMPLE_URL, FEEDBACK_URL, Lang
 from ...common.icon import Icon, FluentIconBase
 from ...components.layout.link_card import LinkCardView
 from ...components.layout.sample_card import SampleCardView
 from ...common.style_sheet import StyleSheet
-
+from ...common.Translate import Translate
 
 class BannerWidget(QWidget):
     """ Banner widget """
@@ -18,8 +18,9 @@ class BannerWidget(QWidget):
         super().__init__(parent=parent)
         self.setFixedHeight(336)
 
+
         self.vBoxLayout = QVBoxLayout(self)
-        self.galleryLabel = QLabel('Invoice App', self)
+        self.galleryLabel = QLabel('PyQt Fluents', self)
         self.banner = QPixmap(':/gallery/images/header1.png')
         self.linkCardView = LinkCardView(self)
 
@@ -32,9 +33,9 @@ class BannerWidget(QWidget):
         self.vBoxLayout.setAlignment(Qt.AlignLeft | Qt.AlignTop)
 
         self.linkCardView.addCard(
-            ':/gallery/images/logo.png',
-            self.tr('Getting started'),
-            self.tr('An overview of app development options and samples.'),
+            'app/resource/images/logo.png',
+            self.tr('Commencer'),
+            self.tr('Créer votre meilleur interface avec PyQt Fluents'),
             HELP_URL
         ) 
         '''
@@ -99,6 +100,7 @@ class HomeInterface(ScrollArea):
         self.banner = BannerWidget(self)
         self.view = QWidget(self)
         self.vBoxLayout = QVBoxLayout(self.view)
+        self.trans = Translate(Lang().current).text
 
         self.__initWidget()
         self.loadSamples()
@@ -121,17 +123,17 @@ class HomeInterface(ScrollArea):
         """ load samples """
         # basic input samples
         basicInputView = SampleCardView(
-            self.tr("Factures"), self.view)
+            self.trans['widgets'], self.view)
         basicInputView.addSampleCard(
             icon=":/gallery/images/controls/Button.png",
-            title="List Factures",
+            title="Widgets",
             content=self.tr(
-                "A control that responds to user input and emit clicked signal."),
-            routeKey="blankInterface",
+                "Control repond au besoins d'utilisateur"),
+            routeKey="widgetsInterface",
             index=0
         )
         self.vBoxLayout.addWidget(basicInputView)
-
+        '''
         # date time samples
         dateTimeView = SampleCardView(self.tr('Date & time samples'), self.view)
         dateTimeView.addSampleCard(
@@ -351,9 +353,10 @@ class HomeInterface(ScrollArea):
             index=6
         )
         self.vBoxLayout.addWidget(textView)
-
+'''
         # view samples
-        collectionView = SampleCardView(self.tr('View samples'), self.view)
+        collectionView = SampleCardView(self.tr('Tables'), self.view)
+        '''
         collectionView.addSampleCard(
             icon=":/gallery/images/controls/ListView.png",
             title="ListView",
@@ -361,15 +364,16 @@ class HomeInterface(ScrollArea):
                 "A control that presents a collection of items in a vertical list."),
             routeKey="viewInterface",
             index=0
-        )
+        ) '''
         collectionView.addSampleCard(
             icon=":/gallery/images/controls/DataGrid.png",
             title="TableView",
             content=self.tr(
-                "The DataGrid control provides a flexible way to display a collection of data in rows and columns."),
-            routeKey="viewInterface",
-            index=1
+                "Le contrôle de grille de données fournit un moyen flexible d'afficher une collection de données en lignes et en colonnes"),
+            routeKey="tableInterface",
+            index=0
         )
+        '''
         collectionView.addSampleCard(
             icon=":/gallery/images/controls/TreeView.png",
             title="TreeView",
@@ -377,5 +381,5 @@ class HomeInterface(ScrollArea):
                 "The TreeView control is a hierarchical list pattern with expanding and collapsing nodes that contain nested items."),
             routeKey="viewInterface",
             index=2
-        )
+        ) '''
         self.vBoxLayout.addWidget(collectionView)
