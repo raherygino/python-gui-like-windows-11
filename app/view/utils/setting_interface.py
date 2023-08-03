@@ -1,12 +1,12 @@
 # coding:utf-8
-from qfluentwidgets import (SettingCardGroup, SwitchSettingCard, FolderListSettingCard,
-                            OptionsSettingCard, PushSettingCard,
-                            HyperlinkCard, PrimaryPushSettingCard, ScrollArea, ComboBox,
-                            ComboBoxSettingCard, ExpandLayout, Theme, CustomColorSettingCard,
-                            setTheme, setThemeColor, RangeSettingCard, isDarkTheme)
+from qfluentwidgets import (SettingCardGroup, SwitchSettingCard,
+                            OptionsSettingCard,
+                            HyperlinkCard, PrimaryPushSettingCard, ScrollArea,
+                            ExpandLayout, CustomColorSettingCard,
+                            setTheme, setThemeColor)
 from qfluentwidgets import FluentIcon as FIF
 from qfluentwidgets import InfoBar
-from PyQt5.QtCore import Qt, pyqtSignal, QUrl, QStandardPaths
+from PyQt5.QtCore import Qt, pyqtSignal, QUrl
 from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtWidgets import QWidget, QLabel, QFileDialog
 
@@ -66,6 +66,8 @@ class SettingInterface(ScrollArea):
             parent=self.personalGroup
         )
 
+        '''
+
         self.languageCard = PrimaryPushSettingCard(
             None,
             FIF.LANGUAGE,
@@ -83,7 +85,7 @@ class SettingInterface(ScrollArea):
         self.languageCard.hBoxLayout.removeWidget(self.languageCard.button)
         self.languageCard.button = None;
         self.languageCard.hBoxLayout.addWidget(self.comboBox)
-        self.languageCard.hBoxLayout.setContentsMargins(14,0,14,0)
+        self.languageCard.hBoxLayout.setContentsMargins(14,0,14,0) '''
         # update software
         self.updateSoftwareGroup = SettingCardGroup(
             self.tr("Software update"), self.scrollWidget)
@@ -149,7 +151,7 @@ class SettingInterface(ScrollArea):
         self.personalGroup.addSettingCard(self.themeCard)
         self.personalGroup.addSettingCard(self.themeColorCard)
         self.personalGroup.addSettingCard(self.zoomCard)
-        self.personalGroup.addSettingCard(self.languageCard)
+        # self.personalGroup.addSettingCard(self.languageCard)
 
 
         self.updateSoftwareGroup.addSettingCard(self.updateOnStartUpCard)
