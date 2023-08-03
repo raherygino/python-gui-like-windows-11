@@ -31,6 +31,16 @@
       "help_details": "Découvrez de nouvelles fonctionnalités et apprenez des conseils utiles sur PyQT-Fluents-Widgets",
       "help_button": "Voir la page d'aide",
       "feedback_title": "Envoyer un feedback",
-      "feedback_details": "Aidez nous pour améliorer PyQt-Fluents par votre feedback"
+      "feedback_details": "Aidez nous pour améliorer PyQt-Fluents par votre feedback",
+      "widgets": "Widgets",
+      "line_edit": "LineEdit",
+      "combox": "Combox",
+      "card": "Card",
+      "checkbox": "Checkobx",
+      "yes": "Oui",
+      "radio_button": "Radio button",
+      "spin_box": "Spin box",
+      "date_picker": "Date picker",
+      "switch_button": "Switch button"
     }
 }

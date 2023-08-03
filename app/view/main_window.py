@@ -9,11 +9,14 @@ from qfluentwidgets import FluentIcon as FIF
 from .utils.gallery_interface import GalleryInterface
 from .utils.setting_interface import SettingInterface
 from .utils.blank_interface import BlankInterface
+from .utils.widgets_interface import WidgetsInterface
+
 from .home.home_interface import HomeInterface
 
-from ..common.config import SUPPORT_URL
+from ..common.config import SUPPORT_URL, Lang
 from ..common.signal_bus import signalBus
 from ..common.translator import Translator
+from ..common.Translate import Translate
 from ..common import resource
 
 class MainWindow(FluentWindow):
@@ -21,9 +24,11 @@ class MainWindow(FluentWindow):
     def __init__(self):
         super().__init__()
         self.initWindow()
+        self.trans = Translate(Lang().current).text
 
         # create sub interface
         self.homeInterface = HomeInterface(self)
+        self.widgetsInterface = WidgetsInterface(self)
         self.blankInterface = BlankInterface(self)
         self.settingInterface = SettingInterface(self)
         # initialize layout
@@ -41,6 +46,7 @@ class MainWindow(FluentWindow):
         # add navigation items
         t = Translator()
         self.addSubInterface(self.homeInterface, FIF.HOME, "Home")
+        self.addSubInterface(self.widgetsInterface, FIF.GAME, self.trans['widgets'])
         self.addSubInterface(self.blankInterface, FIF.DOCUMENT, t.blank)
         self.navigationInterface.addSeparator()
         pos = NavigationItemPosition.SCROLL
