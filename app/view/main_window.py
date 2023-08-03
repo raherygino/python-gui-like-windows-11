@@ -10,6 +10,7 @@ from .utils.gallery_interface import GalleryInterface
 from .utils.setting_interface import SettingInterface
 from .utils.blank_interface import BlankInterface
 from .utils.widgets_interface import WidgetsInterface
+from .utils.table_view_interface import TableViewInterface
 
 from .home.home_interface import HomeInterface
 
@@ -29,6 +30,7 @@ class MainWindow(FluentWindow):
         # create sub interface
         self.homeInterface = HomeInterface(self)
         self.widgetsInterface = WidgetsInterface(self)
+        self.tableViewInterface = TableViewInterface(self)
         self.blankInterface = BlankInterface(self)
         self.settingInterface = SettingInterface(self)
         # initialize layout
@@ -47,6 +49,7 @@ class MainWindow(FluentWindow):
         t = Translator()
         self.addSubInterface(self.homeInterface, FIF.HOME, "Home")
         self.addSubInterface(self.widgetsInterface, FIF.GAME, self.trans['widgets'])
+        self.addSubInterface(self.tableViewInterface, FIF.LAYOUT, self.trans['table_view'])
         self.addSubInterface(self.blankInterface, FIF.DOCUMENT, t.blank)
         self.navigationInterface.addSeparator()
         pos = NavigationItemPosition.SCROLL
